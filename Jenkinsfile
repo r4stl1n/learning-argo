@@ -13,10 +13,8 @@ node {
     }
 
     stage('Semgrep-Scan') {
-        steps {
-          sh 'pip3 install semgrep'
-          sh 'semgrep scan'
-        }
+      sh 'pip3 install semgrep'
+      sh 'semgrep scan'
     }
     
     stage('Test image') {
