@@ -7,16 +7,22 @@ node {
         checkout scm
     }
 
-    stage('Build image') {
-  
-       app = docker.build("r4stl1n/learning-argo")
+    stage('StackHawk') {
+        withCredentials([usernamePassword(credentialsId: 'stackhawk', passwordVariable: 'STACKHAWK_PASS', usernameVariable: 'STACKHAWK_USER')]) {
+            sh '''docker run -e API_KEY=${STACKHAWK_PASS} --rm -v "$(pwd):/hawk:rw --workdir $(pwd) -it stackhawk/hawkscan:latest'''
+        }
     }
-
+ 
     stage('Semgrep-Scan') {
         sh '''docker pull returntocorp/semgrep && \
         docker run \
         -v "$(pwd):$(pwd)" --workdir $(pwd) \
         returntocorp/semgrep semgrep ci --config auto'''
+    }
+
+    stage('Build image') {
+  
+       app = docker.build("r4stl1n/learning-argo")
     }
 
     stage('Test image') {
