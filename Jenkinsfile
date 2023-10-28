@@ -16,7 +16,7 @@ node {
         sh '''docker pull returntocorp/semgrep && \
         docker run \
         -v "$(pwd):$(pwd)" --workdir $(pwd) \
-        returntocorp/semgrep semgrep ci '''
+        returntocorp/semgrep semgrep ci --no-suppress-errors'''
     }
 
     stage('Test image') {
