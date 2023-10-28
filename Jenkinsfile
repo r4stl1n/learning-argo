@@ -13,12 +13,12 @@ node {
     }
 
     stage('Semgrep-Scan') {
-        sh '''docker pull returntocorp/semgrep && \
-        docker run \
-        -v "$(pwd):$(pwd)" --workdir $(pwd) \
-        returntocorp/semgrep semgrep scan'''
+        steps {
+          sh 'pip3 install semgrep'
+          sh 'semgrep scan'
+        }
     }
-
+    
     stage('Test image') {
   
 
