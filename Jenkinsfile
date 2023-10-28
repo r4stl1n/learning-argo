@@ -16,7 +16,7 @@ node {
         sh '''docker pull returntocorp/semgrep && \
         docker run \
         -v "$(pwd):$(pwd)" --workdir $(pwd) \
-        returntocorp/semgrep semgrep scan --config=auto'''
+        returntocorp/semgrep semgrep scan'''
     }
 
     stage('Test image') {
