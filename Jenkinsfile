@@ -9,7 +9,7 @@ node {
 
     stage('StackHawk') {
         withCredentials([usernamePassword(credentialsId: 'stackhawk', passwordVariable: 'STACKHAWK_PASS', usernameVariable: 'STACKHAWK_USER')]) {
-            sh '''docker run -e API_KEY=${STACKHAWK_PASS} --rm -v "$PWD":/hawk:rw --workdir $(pwd) -it stackhawk/hawkscan:latest'''
+            sh '''docker run -e API_KEY=${STACKHAWK_PASS} --rm -v "$PWD":/hawk:rw --workdir $(pwd) stackhawk/hawkscan:latest'''
         }
     }
  
