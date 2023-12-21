@@ -8,5 +8,5 @@ app = Flask(__name__)
 def hello_world():
     user_input = "foo && cat /etc/passwd" # value supplied by user
     subprocess.call("grep -R {} .".format(user_input), shell=True)
-    return 'Just a quick hello-world'
+    return 'Just a quick hello-world + 1'
 
